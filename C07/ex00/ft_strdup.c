@@ -1,27 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sqrt.c                                          :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adouiyeh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/05 06:30:54 by adouiyeh          #+#    #+#             */
-/*   Updated: 2023/09/06 10:43:07 by adouiyeh         ###   ########.fr       */
+/*   Created: 2023/09/05 22:09:12 by adouiyeh          #+#    #+#             */
+/*   Updated: 2023/09/05 22:53:59 by adouiyeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_sqrt(int nb)
+#include <stdlib.h>
+
+int	ft_strlen(char *src)
 {
 	int	i;
 
-	i = 1;
-	if (nb <= 0)
-		return (0);
-	while (i * i <= nb && i <= 46340)
+	i = 0;
+	while (src[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strdup(char *src)
+{
+	int		i;
+	int		slen;
+	char	*dest;
+
+	i = 0;
+	slen = ft_strlen(src);
+	dest = (char *)malloc(slen);
+	if (!dest)
+		return (NULL);
+	while (src[i])
 	{
-		if (i * i == nb && nb % i == 0)
-			return (i);
+		dest[i] = src[i];
 		i++;
 	}
-	return (0);
+	dest[i] = '\0';
+	return (dest);
 }
