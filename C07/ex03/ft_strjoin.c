@@ -6,27 +6,43 @@
 /*   By: adouiyeh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:34:01 by adouiyeh          #+#    #+#             */
-/*   Updated: 2023/09/06 16:03:25 by adouiyeh         ###   ########.fr       */
+/*   Updated: 2023/09/06 22:05:33 by adouiyeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <stdlib.h>
 
 int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
 		i++;
 	return (i);
 }
-int	ft_strjoin(int size, char **strs, char *sep)
+
+void	ft_strcat(char *dest, char *src)
 {
-	int		i;
-	int		strs_len;
-	int 	sep_len;
-	char	*res;
+	int	i;
+	int	j;
+
+	i = 0;
+	j = ft_strlen(dest);
+	while (src[i])
+	{
+		dest[j] = src[i];
+		i++;
+		j++;
+	}
+	dest[j] = '\0';
+}
+
+int	ft_str_size(int size, char **strs, char *sep)
+{
+	int	i;
+	int	strs_len;
+	int	sep_len;
 
 	i = 0;
 	strs_len = 0;
@@ -36,19 +52,25 @@ int	ft_strjoin(int size, char **strs, char *sep)
 		strs_len += ft_strlen(strs[i]);
 		i++;
 	}
-	strs_len += sep_len + 1;
-	res = (char *)malloc(sizeof(char) * strs_len);
-	if (!res)
-		return (NULL);
-	while (
-
-
-	
+	return (strs_len + sep_len + 1);
 }
 
-int main()
+char	*ft_strjoin(int size, char **strs, char *sep)
 {
-	char sep[] = "yo";
-	char *strs[] = {"wq", "as"};
-	printf("%d", ft_strjoin(2, strs, sep));
+	int		i;
+	char	*res;
+
+	res = (char *)malloc(sizeof(char) * ft_str_size(size, strs, sep));
+	res[0] = 0;
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		ft_strcat(res, strs[i]);
+		if (i < size - 1)
+			ft_strcat(res, sep);
+		i++;
+	}
+	return (res);
 }

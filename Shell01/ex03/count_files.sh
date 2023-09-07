@@ -1,2 +1,2 @@
-#1/bin/sh
-find . -type f | wc -l | tr -d ' '
+#!/bin/bash
+find . | wc -l | sed 's/ //g'
